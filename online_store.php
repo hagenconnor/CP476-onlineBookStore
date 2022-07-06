@@ -12,14 +12,17 @@
 <form action="/CP476/CP476-onlineBookStore/online_store.php" method="post">
 <input type="submit" name="show_books" value="Show Books">
 </form>
+<form action="/CP476/CP476-onlineBookStore/add_book.php" method="post">
+<input type="submit" name="add_book" value="Add New Book">
+</form>
 
 </div>
 </body>
 </html>
 
 <?php
+session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     try {
         $conn = new mysqli("localhost", "root", "password", "online_bookstore");
@@ -33,11 +36,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit('Error connecting to database'); 
     }
     // Fetch books table details.
+
+    if (isset($_POST['show_books'])){
+        get_books($conn);
+    
+    }
+}
+
+function get_books($conn){
     $sql = "SELECT * from book_list";
     $result = $conn->query($sql);
     foreach($result as $row) {
         print_r($row);       // Print the entire row data
+        print_r ("\n");
     }
+}
+function output_formatter($string){
     
 }
 
