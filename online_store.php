@@ -15,6 +15,11 @@
 <form action="/CP476/CP476-onlineBookStore/add_book.php" method="post">
 <input type="submit" name="add_book" value="Add New Book">
 </form>
+</form>
+<form action="/CP476/CP476-onlineBookStore/update_book.php" method="post">
+<input type="submit" name="update_book" value="Update Book">
+</form>
+
 
 </div>
 </body>
@@ -46,9 +51,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 function get_books($conn){
     $sql = "SELECT * from book_list";
     $result = $conn->query($sql);
+    print("******Book List*******");
+    print("<br>");
     foreach($result as $row) {
-        print_r($row);       // Print the entire row data
-        print_r ("\n");
+        $id = $row['id'];
+        $title = $row['title'];
+        $author = $row['author'];
+        $genre = $row['genre'];
+        print("Book ID: $id ");
+        print("Title: $title ");
+        print("Author: $author ");
+        print("Genre: $genre ");
+        print("<br>");
+
     }
 }
 function output_formatter($string){
