@@ -10,12 +10,23 @@
 <label for="genre">Genre:</label><br>
 <input type="text" id="genre" name="genre"><br>
 
+<label> Select which field to update:</label><br>
+<input type="radio" id="u_title" name="update_field" value="Title">
+<label for="u_title">Title</label><br>
+<input type="radio" id="u_author" name="update_field" value="Author">
+<label for="u_author">Author</label> <br>
+<input type="radio" id="u_year" name="update_field" value="Year">
+<label for="u_year">Year</label><br>
+<input type="radio" id="u_genre" name="update_field" value="Genre">
+<label for="u_genre">Genre</label><br>
+
 <input type="submit" name="update" value="Update Book">
 
 </form>
 
 <?php
 session_start();
+$id = null;
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     try {
         $conn = new mysqli("localhost", "root", "password", "online_bookstore");
@@ -33,50 +44,43 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql->bind_param("i", $id); 
         $sql->execute();
         $result = $sql->get_result();
-        
-        while ($row = $result->fetch_array(MYSQLI_NUM)) {
-            foreach ($row as $r) {
-                print "$r ";
-            }
-            print "\n";
-        }
+        $row = $result->fetch_array(MYSQLI_NUM);
+
+        $GLOBALS['id'] = $row[0];
+        //print("ID passed from previous page: $id");
 
     }
     if (isset($_POST['update'])){
+
+        $selection = $_POST['update_field'];
+        print($GLOBALS['id']);
+
         $title = $_POST['title'];
         $author = $_POST['author'];
         $year = $_POST['year'];
         $genre = $_POST['genre'];
         $exec_success = false;
 
-        if ($title != null & $author != null & $year != null & $genre != null){
-            //all are here
-            $sql = $conn->prepare("UPDATE book_list SET title=?, author=?, genre=?");
-            $sql->bind_param("sss", $title, $author, $genre);
-            if($sql->execute() == true){
-                $exec_success = true;
-            }
-            
+        if ($selection == "Title"){
+            $sql = $conn->prepare("UPDATE book_list SET title=? WHERE id=?");
+            $sql->bind_param("si", $title, $id);
+            $sql->execute();
+            print($id);
         }
-        else if ($author != null & $year != null & $genre != null){
-            //title is null
-            $sql = $conn->prepare("UPDATE book_list SET author=?, genre=?");
-            $sql->bind_param("ss", $author, $genre);
+        else if ($selection == "Author"){
+            $sql = $conn->prepare("UPDATE book_list SET author=? WHERE id=?");
+            $sql->bind_param("si", $author, $id);
         }
-        else if ($year != null & $genre != null){
-            //title and author are null
-            $sql = $conn->prepare("UPDATE book_list SET year=?, genre=?");
-            $sql->bind_param("is", $year, $genre);
-        }
-        else if ($genre != null){
-            //title, author, and year are null
-            $sql = $conn->prepare("UPDATE book_list SET genre=?");
-            $sql->bind_param("s", $genre);
+        else if ($selection == "Year"){
+            $sql = $conn->prepare("UPDATE book_list SET year=? WHERE id=?");
+            $sql->bind_param("si", $year, $id);
         }
         else{
-            //all are null
-            print("Add details to this page to change the book details.");
+            //Selection is genre.
+            $sql = $conn->prepare("UPDATE book_list SET genre=? WHERE id=?");
+            $sql->bind_param("si", $genre, $id);
         }
+
 
 
     }
