@@ -23,10 +23,13 @@
 <input type="submit" name="update" value="Update Book">
 
 </form>
+</form>
+<form action="/CP476/CP476-onlineBookStore/online_store.php" method="post">
+<input type="submit" name="back" value="Back">
+</form>
 
 <?php
 session_start();
-$id = null;
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     try {
         $conn = new mysqli("localhost", "root", "password", "online_bookstore");
@@ -46,14 +49,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $result = $sql->get_result();
         $row = $result->fetch_array(MYSQLI_NUM);
 
-        $GLOBALS['id'] = $row[0];
+        if ($row == null){
+            print("Error: Book does not exist.");
+        }
+        else{
+            $_SESSION['update_id'] = $row[0];
+        }
+
+        //print($_SESSION['id']);
         //print("ID passed from previous page: $id");
 
     }
     if (isset($_POST['update'])){
 
         $selection = $_POST['update_field'];
-        print($GLOBALS['id']);
+        $id = $_SESSION['update_id'];
+
+        //print("id after function call: $id");
 
         $title = $_POST['title'];
         $author = $_POST['author'];
@@ -64,21 +76,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($selection == "Title"){
             $sql = $conn->prepare("UPDATE book_list SET title=? WHERE id=?");
             $sql->bind_param("si", $title, $id);
-            $sql->execute();
+            if ($sql->execute() == true){
+                $exec_success = true;
+            }
             print($id);
         }
         else if ($selection == "Author"){
             $sql = $conn->prepare("UPDATE book_list SET author=? WHERE id=?");
             $sql->bind_param("si", $author, $id);
+            $sql->execute();
+            if ($sql->execute() == true){
+                $exec_success = true;
+            }
         }
         else if ($selection == "Year"){
             $sql = $conn->prepare("UPDATE book_list SET year=? WHERE id=?");
             $sql->bind_param("si", $year, $id);
+            $sql->execute();
+            if ($sql->execute() == true){
+                $exec_success = true;
+            }
         }
         else{
             //Selection is genre.
             $sql = $conn->prepare("UPDATE book_list SET genre=? WHERE id=?");
             $sql->bind_param("si", $genre, $id);
+            $sql->execute();
+            if ($sql->execute() == true){
+                $exec_success = true;
+            }
         }
 
 
