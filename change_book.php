@@ -1,3 +1,10 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Modify a Book</title>
+</head>
+<body>
 </form>
 <form action="/CP476/CP476-onlineBookStore/change_book.php" method="post">
 

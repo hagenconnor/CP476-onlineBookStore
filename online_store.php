@@ -5,7 +5,6 @@
 	<title>Online Bookstore</title>
 </head>
 <body>
-<!-- Script 3.2 - feedback.html -->
 <div><p>Welcome to the online book store!</p>
 <div><p>Show books:</p>
 
@@ -14,6 +13,10 @@
 </form>
 <form action="/CP476/CP476-onlineBookStore/add_book.php" method="post">
 <input type="submit" name="add_book" value="Add New Book">
+</form>
+</form>
+<form action="/CP476/CP476-onlineBookStore/search_book_delete.php" method="post">
+<input type="submit" name="delete_book" value="Delete Book">
 </form>
 </form>
 <form action="/CP476/CP476-onlineBookStore/update_book.php" method="post">

@@ -1,3 +1,10 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Add a Book</title>
+</head>
+<body>
 </form>
 <form action="/CP476/CP476-onlineBookStore/add_book.php" method="post">
 
@@ -41,8 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $genre = $_POST['genre'];
         $year = $_POST['year'];
 
-        $sql = $conn->prepare("INSERT INTO book_list(title, author, genre) VALUES (?, ?, ?)");
-        $sql->bind_param("sss", $title, $author, $genre); 
+        $sql = $conn->prepare("INSERT INTO book_list(title, author, genre, year) VALUES (?, ?, ?, ?)");
+        $sql->bind_param("sss", $title, $author, $genre, $year); 
         if($sql->execute() == true)
         {
             echo "Insertion succeeded \n";
