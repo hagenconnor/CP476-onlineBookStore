@@ -6,7 +6,7 @@
 </head>
 <body>
 <div><p>Welcome to the online book store!</p>
-<div><p>Show books:</p>
+<div><p>Use the menu buttons below to interact:</p>
 
 <form action="/CP476/CP476-onlineBookStore/online_store.php" method="post">
 <input type="submit" name="show_books" value="Show Books">
