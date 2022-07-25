@@ -6,7 +6,7 @@
 </head>
 <body>
 </form>
-<form action="/CP476/CP476-onlineBookStore/online_store.php" method="post">
+<form action="online_store.php" method="post">
 <input type="submit" name="back" value="Back">
 </form>
 

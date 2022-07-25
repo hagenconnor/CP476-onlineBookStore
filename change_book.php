@@ -6,7 +6,7 @@
 </head>
 <body>
 </form>
-<form action="/CP476/CP476-onlineBookStore/change_book.php" method="post">
+<form action="change_book.php" method="post">
 
 <label for="title">Book Title:</label><br>
 <input type="text" id="title" name="title"><br>
@@ -31,7 +31,7 @@
 
 </form>
 </form>
-<form action="/CP476/CP476-onlineBookStore/online_store.php" method="post">
+<form action="online_store.php" method="post">
 <input type="submit" name="back" value="Back">
 </form>
 
