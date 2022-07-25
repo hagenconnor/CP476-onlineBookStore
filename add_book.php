@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $year = $_POST['year'];
 
         $sql = $conn->prepare("INSERT INTO book_list(title, author, genre, year) VALUES (?, ?, ?, ?)");
-        $sql->bind_param("sss", $title, $author, $genre, $year); 
+        $sql->bind_param("sssi", $title, $author, $genre, $year); 
         if($sql->execute() == true)
         {
             echo "Insertion succeeded \n";
