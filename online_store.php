@@ -33,22 +33,10 @@
 </html>
 
 <?php
+include("db.php");
 session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-    try {
-        $conn = new mysqli("localhost", "root", "password", "online_bookstore");
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-        //echo "Connected to MySQL server \n";
-        $conn->set_charset("utf8mb4");
-    } catch(Exception $e) {
-        error_log($e->getMessage());
-        exit('Error connecting to database'); 
-    }
     // Fetch books table details.
-
     if (isset($_POST['show_books'])){
         get_books($conn);
     

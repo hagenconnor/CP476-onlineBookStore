@@ -36,18 +36,9 @@
 </form>
 
 <?php
+include("db.php");
 session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    try {
-        $conn = new mysqli("localhost", "root", "password", "online_bookstore");
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-        $conn->set_charset("utf8mb4");
-    } catch(Exception $e) {
-        error_log($e->getMessage());
-        exit('Error connecting to database'); 
-    }
     if (isset($_POST['submit'])){
         $id = $_POST['book_id'];
         $sql = $conn->prepare("SELECT * FROM book_list WHERE id= ?");
@@ -63,16 +54,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['update_id'] = $row[0];
         }
 
-        //print($_SESSION['id']);
-        //print("ID passed from previous page: $id");
-
     }
     if (isset($_POST['update'])){
 
         $selection = $_POST['update_field'];
         $id = $_SESSION['update_id'];
-
-        //print("id after function call: $id");
 
         $title = $_POST['title'];
         $author = $_POST['author'];
@@ -86,7 +72,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($sql->execute() == true){
                 $exec_success = true;
             }
-            print($id);
         }
         else if ($selection == "Author"){
             $sql = $conn->prepare("UPDATE book_list SET author=? WHERE id=?");
@@ -113,8 +98,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $exec_success = true;
             }
         }
-
-
+        header('Location: ../online_store.php');
+        echo ("<script LANGUAGE='JavaScript'> window.alert('Book updated.');window.location.href='login.html';</script>");
 
     }
 

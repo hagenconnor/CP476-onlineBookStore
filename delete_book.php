@@ -11,19 +11,10 @@
 </form>
 
 <?php
+include("db.php");
 session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['submit'])){
-        try {
-            $conn = new mysqli("localhost", "root", "password", "online_bookstore");
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
-            $conn->set_charset("utf8mb4");
-        } catch(Exception $e) {
-            error_log($e->getMessage());
-            exit('Error connecting to database'); 
-        }
             $id = $_POST['book_id'];
             $sql = $conn->prepare("DELETE FROM book_list WHERE id= ?");
             $sql->bind_param("i", $id); 
@@ -36,9 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             else{
                 print("Book not found.");
             }
-
-
-
     }
 }
 

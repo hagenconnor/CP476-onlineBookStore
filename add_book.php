@@ -28,21 +28,11 @@
 
 
 <?php
+include("db.php");
 session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['submit'])){
-        print "Got here and add_book was pressed.";
-        try {
-            $conn = new mysqli("localhost", "root", "password", "online_bookstore");
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
-            $conn->set_charset("utf8mb4");
-        } catch(Exception $e) {
-            error_log($e->getMessage());
-            exit('Error connecting to database'); 
-        }
-
+        
         $title = $_POST['title'];
         $author = $_POST['author'];
         $genre = $_POST['genre'];
