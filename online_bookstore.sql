@@ -30,7 +30,7 @@ CREATE TABLE `book_list` (
   `year` int DEFAULT NULL,
   `reg_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,34 +39,35 @@ CREATE TABLE `book_list` (
 
 LOCK TABLES `book_list` WRITE;
 /*!40000 ALTER TABLE `book_list` DISABLE KEYS */;
-INSERT INTO `book_list` VALUES (1,'test23455','Changed_author','test genre',NULL,'2022-07-18 19:21:22'),(2,'Test123','Connor Hagen','Test2Genre',NULL,'2022-07-06 18:48:34'),(5,'Test2134','Connor Hagen','Horror',1982,'2022-07-25 23:51:05'),(6,'Test7','Test Author','Woah',1987,'2022-07-26 00:04:47');
+INSERT INTO `book_list` VALUES (1,'Updated_title4','new_author','test genre',NULL,'2022-07-27 19:24:48'),(2,'Test123','Connor Hagen','Test2Genre',NULL,'2022-07-06 18:48:34'),(7,'Test_book98','Macbook','Fiction',2022,'2022-07-27 16:20:16'),(12,'Another book','Another author','Another Genre',1999,'2022-07-27 20:02:32');
 /*!40000 ALTER TABLE `book_list` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `USERS`
+-- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `USERS`;
+DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `USERS` (
+CREATE TABLE `users` (
   `user_id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(50) DEFAULT NULL,
-  `password` varchar(100) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `USERS`
+-- Dumping data for table `users`
 --
 
-LOCK TABLES `USERS` WRITE;
-/*!40000 ALTER TABLE `USERS` DISABLE KEYS */;
-/*!40000 ALTER TABLE `USERS` ENABLE KEYS */;
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (2,'Connor123','$2y$10$6fT4ExNdyOoJ77fwWes9fezIuKn1gF4dq.yGl.ebRsqWLx50iBwsm','test123@hotmail.com','2022-07-27 01:25:14'),(3,'testaccount','$2y$10$xm0w3jude1jbNabtm4CfD.6xGrddzhVOu7w0nUG/pcL9ISah6hgfm','test776@gmail.com','2022-07-27 01:28:54'),(4,'new_user','$2y$10$fZMsi.AyEYuAzj5hEMa1He5irBAdurmG0I8LMhtSZwOrC815dT/Oi','new_email@hotmail.com','2022-07-27 19:25:33');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -78,4 +79,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-26 15:21:35
+-- Dump completed on 2022-07-27 19:44:17
