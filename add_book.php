@@ -36,15 +36,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $title = $_POST['title'];
         $author = $_POST['author'];
         $genre = $_POST['genre'];
-        $year = $_POST['year'];
+        $year = (int) $_POST['year'];
 
-        $sql = $conn->prepare("INSERT INTO book_list(title, author, genre, year) VALUES (?, ?, ?, ?)");
-        $sql->bind_param("sssi", $title, $author, $genre, $year); 
-        if($sql->execute() == true)
-        {
-            echo "Insertion succeeded \n";
-        }else{
-            echo "Insertion failed \n";
+
+        if ($title == '' || $author == '' || $genre == '' || $year == ''){ //A field was left blank.
+            echo ("<script LANGUAGE='JavaScript'> window.alert('Please enter all fields.');window.location.href='add_book.php';</script>");
+        }
+        else if ($year == 0){ //The year field defaulted to 0, meaning input was invalid.
+            echo ("<script LANGUAGE='JavaScript'> window.alert('Please enter a valid year!');window.location.href='add_book.php';</script>");
+        }
+        else{ //Input is correct.
+            $sql = $conn->prepare("INSERT INTO book_list(title, author, genre, year) VALUES (?, ?, ?, ?)");
+            $sql->bind_param("sssi", $title, $author, $genre, $year); 
+
+            if($sql->execute() == true)
+            {
+                echo "Insertion succeeded \n";
+            }else{
+                echo "Insertion failed \n";
+            }
         }
 
     }
