@@ -23,6 +23,10 @@
 <input type="submit" name="update_book" value="Update Book">
 </form>
 
+<form action="login.html" method="post">
+<input type="submit" name="logout" value="Logout">
+</form>
+
 
 </div>
 </body>
