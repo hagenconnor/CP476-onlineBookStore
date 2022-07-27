@@ -61,9 +61,5 @@ function get_books($conn){
 
     }
 }
-function output_formatter($string){
-    
-}
-
 
 ?>
