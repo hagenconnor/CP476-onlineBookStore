@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $row = $result->fetch_array(MYSQLI_NUM);
 
         if ($row == null){
-            print("Error: Book does not exist.");
+            echo ("<script LANGUAGE='JavaScript'> window.alert('Error: Book does not exist.');window.location.href='update_book.php';</script>");
         }
         else{
             $_SESSION['update_id'] = $row[0];

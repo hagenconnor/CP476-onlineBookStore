@@ -53,10 +53,12 @@ function get_books($conn){
         $title = $row['title'];
         $author = $row['author'];
         $genre = $row['genre'];
+        $year = $row['year'];
         print("Book ID: $id ");
         print("Title: $title ");
         print("Author: $author ");
         print("Genre: $genre ");
+        print("Year: $year");
         print("<br>");
 
     }
